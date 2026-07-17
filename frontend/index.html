@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI InterviewAI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 3D Particle Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="brand-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="url(#navGrad)" stroke-width="2"/>
+                    <path d="M10 16L14 20L22 12" stroke="url(#navGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs><linearGradient id="navGrad" x1="0" y1="0" x2="32" y2="32">
+                        <stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/>
+                    </linearGradient></defs>
+                </svg>
+            </div>
+            <span>AI InterviewAI</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-page="home">Home</a>
+            <a href="#" class="nav-link" data-page="analyze">Analyze</a>
+            <a href="#" class="nav-link" data-page="history">History</a>
+        </div>
+    </nav>
+
+    <!-- ==================== HOME PAGE ==================== -->
+    <section id="page-home" class="page active">
+        <div class="hero">
+            <div class="hero-3d-container" id="hero-3d">
+                <div class="floating-cube">
+                    <div class="cube-face front"></div>
+                    <div class="cube-face back"></div>
+                    <div class="cube-face right"></div>
+                    <div class="cube-face left"></div>
+                    <div class="cube-face top"></div>
+                    <div class="cube-face bottom"></div>
+                </div>
+                <div class="floating-sphere sphere-1"></div>
+                <div class="floating-sphere sphere-2"></div>
+                <div class="floating-sphere sphere-3"></div>
+                <div class="orbit-ring ring-1"></div>
+                <div class="orbit-ring ring-2"></div>
+                <div class="orbit-ring ring-3"></div>
+            </div>
+
+            <div class="hero-content">
+                <div class="badge">AI InterviewAI</div>
+                <h1 class="hero-title">
+                    <span class="title-line">Master Your</span>
+                    <span class="title-line gradient-text">Interview Skills</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Get instant, detailed feedback on your interview responses.
+                    Analyze communication, confidence, vocabulary, and clarity with our advanced AI.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-glow" onclick="navigateTo('analyze')">
+                        <span>Start Analyzing</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToFeatures()">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number" data-target="15">0</div>
+                <div class="stat-label">Metrics Analyzed</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="5">0</div>
+                <div class="stat-label">Industry Domains</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="98">0</div>
+                <div class="stat-label">Accuracy Rate %</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="3">0</div>
+                <div class="stat-label">Second Analysis</div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="features-section" id="features">
+            <div class="section-header">
+                <h2>Powerful Analysis Features</h2>
+                <p>Everything you need to ace your next interview</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon icon-purple">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 3L25 9V19L14 25L3 19V9L14 3Z" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="14" cy="14" r="4" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Communication Score</h3>
+                    <p>Evaluates clarity, structure, and effectiveness of your responses with detailed breakdowns.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon icon-blue">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 3V25M3 14H25" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Confidence Detection</h3>
+                    <p>Measures confidence through action verbs, hedging language, and tonal analysis.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon icon-green">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <rect x="3" y="8" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 8V6C8 4.34 9.34 3 11 3H17C18.66 3 20 4.34 20 6V8" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="14" cy="16" r="3" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Vocabulary Analysis</h3>
+                    <p>Analyzes word diversity, complexity, and professional terminology usage.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon icon-orange">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M3 21L10 14L15 18L25 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="25" cy="7" r="3" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Sentiment Analysis</h3>
+                    <p>Detects positive/negative tone and emotional alignment with professional contexts.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon icon-red">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 3L17.5 10.5L26 11.5L20 17.5L21.5 26L14 22L6.5 26L8 17.5L2 11.5L10.5 10.5L14 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Strengths & Weaknesses</h3>
+                    <p>Identifies what you did well and areas that need improvement with actionable tips.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon icon-teal">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <rect x="3" y="3" width="9" height="9" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="16" y="3" width="9" height="9" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="3" y="16" width="9" height="9" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="16" y="16" width="9" height="9" rx="1" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Industry Keywords</h3>
+                    <p>Scans for relevant industry keywords across tech, management, data, marketing, and finance.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="how-it-works">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Three simple steps to interview mastery</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Input Your Response</h3>
+                        <p>Type your interview answer directly or upload a text file containing your responses.</p>
+                    </div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>AI Analysis</h3>
+                        <p>Our AI engine processes your response across 15+ metrics in real-time.</p>
+                    </div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Get Insights</h3>
+                        <p>Receive a comprehensive report with scores, strengths, and improvement areas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ANALYZE PAGE ==================== -->
+    <section id="page-analyze" class="page">
+        <div class="analyze-container">
+            <div class="page-header">
+                <h1>Analyze Your Response</h1>
+                <p>Paste your interview answer or upload a file for instant AI-powered feedback</p>
+            </div>
+
+            <div class="analyze-tabs">
+                <button class="tab-btn active" data-tab="text">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M3 3H15M3 7H12M3 11H15M3 15H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Type Response
+                </button>
+                <button class="tab-btn" data-tab="file">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M9 3V12M5 8L9 12L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 15H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Upload File
+                </button>
+            </div>
+
+            <!-- Text Input Tab -->
+            <div class="tab-content active" id="tab-text">
+                <div class="input-group">
+                    <label for="interview-question">Interview Question (Optional)</label>
+                    <input type="text" id="interview-question" placeholder="e.g., Tell me about a time you led a team project..." class="text-input">
+                </div>
+                <div class="input-group">
+                    <label for="interview-response">Your Response</label>
+                    <textarea id="interview-response" rows="10" placeholder="Type or paste your interview response here. Be as detailed as possible for the most accurate analysis..." class="text-input textarea"></textarea>
+                    <div class="char-count"><span id="char-count">0</span> characters</div>
+                </div>
+                <div class="sample-responses">
+                    <span>Try a sample:</span>
+                    <button class="sample-btn" onclick="loadSample('junior')">Junior Developer</button>
+                    <button class="sample-btn" onclick="loadSample('senior')">Senior Manager</button>
+                    <button class="sample-btn" onclick="loadSample('creative')">Creative Role</button>
+                </div>
+                <button class="btn btn-primary btn-full" id="analyze-btn" onclick="analyzeText()">
+                    <span>Analyze Response</span>
+                    <div class="spinner" id="analyze-spinner"></div>
+                </button>
+            </div>
+
+            <!-- File Upload Tab -->
+            <div class="tab-content" id="tab-file">
+                <div class="upload-zone" id="upload-zone">
+                    <div class="upload-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 32V16M16 22L24 16L32 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 32V38C8 40.2 9.8 42 12 42H36C38.2 42 40 40.2 40 38V32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Drop your file here</h3>
+                    <p>or click to browse</p>
+                    <span class="upload-formats">Supports: TXT, PDF, DOCX (Max 50MB)</span>
+                    <input type="file" id="file-input" accept=".txt,.pdf,.docx" hidden>
+                </div>
+                <div class="selected-file" id="selected-file" style="display:none">
+                    <div class="file-info">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <div>
+                            <div class="file-name" id="file-name"></div>
+                            <div class="file-size" id="file-size"></div>
+                        </div>
+                    </div>
+                    <button class="btn-icon" onclick="clearFile()">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <button class="btn btn-primary btn-full" id="upload-btn" onclick="analyzeFile()" disabled>
+                    <span>Analyze File</span>
+                    <div class="spinner" id="upload-spinner"></div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== RESULTS PAGE ==================== -->
+    <section id="page-results" class="page">
+        <div class="results-container">
+            <div class="page-header">
+                <button class="btn-back" onclick="navigateTo('analyze')">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    New Analysis
+                </button>
+                <h1>Analysis Results</h1>
+            </div>
+
+            <!-- Overall Score -->
+            <div class="score-hero">
+                <div class="score-ring" id="overall-score-ring">
+                    <svg viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="90" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="none"/>
+                        <circle cx="100" cy="100" r="90" stroke="url(#scoreGrad)" stroke-width="8" fill="none"
+                                stroke-dasharray="565" stroke-dashoffset="565" stroke-linecap="round" id="score-circle"/>
+                        <defs>
+                            <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#6366f1"/>
+                                <stop offset="100%" stop-color="#a855f7"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="score-value">
+                        <span class="score-number" id="overall-score">0</span>
+                        <span class="score-max">/100</span>
+                    </div>
+                </div>
+                <div class="score-details">
+                    <h2 id="overall-label">Analyzing...</h2>
+                    <p id="score-summary">Calculating your overall interview performance score.</p>
+                </div>
+            </div>
+
+            <!-- Metric Cards -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon purple">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 7V13L10 18L2 13V7L10 2Z" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span class="metric-label">Communication</span>
+                    </div>
+                    <div class="metric-bar"><div class="metric-fill" id="comm-bar"></div></div>
+                    <div class="metric-score"><span id="comm-score">0</span>/100</div>
+                    <div class="metric-detail" id="comm-detail"></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon blue">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2V18M2 10H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span class="metric-label">Confidence</span>
+                    </div>
+                    <div class="metric-bar"><div class="metric-fill blue" id="conf-bar"></div></div>
+                    <div class="metric-score"><span id="conf-score">0</span>/100</div>
+                    <div class="metric-detail" id="conf-detail"></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon green">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M6 5V3.5C6 2.67 6.67 2 7.5 2H12.5C13.33 2 14 2.67 14 3.5V5" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span class="metric-label">Vocabulary</span>
+                    </div>
+                    <div class="metric-bar"><div class="metric-fill green" id="vocab-bar"></div></div>
+                    <div class="metric-score"><span id="vocab-score">0</span>/100</div>
+                    <div class="metric-detail" id="vocab-detail"></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon orange">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 15L7 10L11 13L18 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <span class="metric-label">Clarity</span>
+                    </div>
+                    <div class="metric-bar"><div class="metric-fill orange" id="clar-bar"></div></div>
+                    <div class="metric-score"><span id="clar-score">0</span>/100</div>
+                    <div class="metric-detail" id="clar-detail"></div>
+                </div>
+            </div>
+
+            <!-- Sentiment & Fillers -->
+            <div class="dual-panel">
+                <div class="panel-card">
+                    <h3>Sentiment Analysis</h3>
+                    <div class="sentiment-display">
+                        <div class="sentiment-gauge" id="sentiment-gauge">
+                            <div class="gauge-bar">
+                                <div class="gauge-fill" id="gauge-fill"></div>
+                                <div class="gauge-marker" id="gauge-marker"></div>
+                            </div>
+                            <div class="gauge-labels">
+                                <span>Negative</span>
+                                <span>Neutral</span>
+                                <span>Positive</span>
+                            </div>
+                        </div>
+                        <div class="sentiment-stats">
+                            <div class="sent-stat positive">
+                                <span class="stat-val" id="pos-words">0</span>
+                                <span class="stat-desc">Positive Words</span>
+                            </div>
+                            <div class="sent-stat negative">
+                                <span class="stat-val" id="neg-words">0</span>
+                                <span class="stat-desc">Negative Words</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-card">
+                    <h3>Filler Words</h3>
+                    <div class="filler-display">
+                        <div class="filler-count" id="filler-total">0</div>
+                        <div class="filler-rating" id="filler-rating">Excellent</div>
+                        <div class="filler-list" id="filler-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strengths & Improvements -->
+            <div class="dual-panel">
+                <div class="panel-card strengths">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.5 7.5L18 8.5L14 12.5L15 18L10 15.5L5 18L6 12.5L2 8.5L7.5 7.5L10 2Z" fill="#22c55e"/></svg>
+                        Strengths
+                    </h3>
+                    <ul id="strengths-list"></ul>
+                </div>
+                <div class="panel-card improvements">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#f59e0b" stroke-width="1.5"/><path d="M10 6V11M10 13V14" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        Areas for Improvement
+                    </h3>
+                    <ul id="improvements-list"></ul>
+                </div>
+            </div>
+
+            <!-- Keywords -->
+            <div class="panel-card keywords-panel">
+                <h3>Industry Keywords Detected</h3>
+                <div class="keywords-container" id="keywords-container">
+                    <p class="keywords-empty">No industry-specific keywords detected.</p>
+                </div>
+            </div>
+
+            <!-- Action Verbs -->
+            <div class="panel-card">
+                <h3>Action Verbs Used</h3>
+                <div class="verb-tags" id="verb-tags"></div>
+            </div>
+
+            <!-- Stats Summary -->
+            <div class="stats-summary">
+                <div class="sum-stat"><span class="sum-val" id="sum-words">0</span><span class="sum-label">Words</span></div>
+                <div class="sum-stat"><span class="sum-val" id="sum-sentences">0</span><span class="sum-label">Sentences</span></div>
+                <div class="sum-stat"><span class="sum-val" id="sum-avglen">0</span><span class="sum-label">Avg Words/Sentence</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HISTORY PAGE ==================== -->
+    <section id="page-history" class="page">
+        <div class="history-container">
+            <div class="page-header">
+                <h1>Analysis History</h1>
+                <p>Review your past interview analyses</p>
+            </div>
+            <div id="history-list" class="history-list">
+                <div class="empty-state">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                        <circle cx="32" cy="32" r="28" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                        <path d="M32 20V34L40 38" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3>No analyses yet</h3>
+                    <p>Start by analyzing your first interview response</p>
+                    <button class="btn btn-primary" onclick="navigateTo('analyze')">Start Analyzing</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
